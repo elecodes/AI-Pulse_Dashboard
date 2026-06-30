@@ -1,0 +1,9 @@
+.chart-placeholder {
+  padding: 3rem 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.chart-error {
+  color: var(--color-danger);
+}

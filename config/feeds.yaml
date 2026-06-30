@@ -1,0 +1,32 @@
+lookback_hours: 48
+run_interval_minutes: 60
+pipeline_timeout_seconds: 300
+db_path: data/articles.db
+json_export_path: data/articles.json
+
+feeds:
+  - name: techcrunch-ai
+    type: rss
+    url: https://techcrunch.com/category/artificial-intelligence/feed/
+    enabled: true
+
+  - name: mit-tech-review-ai
+    type: rss
+    url: https://www.technologyreview.com/feed/
+    enabled: true
+
+  - name: verge-ai
+    type: rss
+    url: https://www.theverge.com/rss/index.xml
+    enabled: true
+
+  - name: arxiv-cs-ai
+    type: arxiv
+    url: https://export.arxiv.org/api/query
+    categories: [cs.AI, cs.LG, cs.CL, cs.CV]
+    enabled: true
+
+  - name: huggingface-trending
+    type: huggingface
+    url: https://huggingface.co/api/models
+    enabled: true

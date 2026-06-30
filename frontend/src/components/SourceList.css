@@ -1,0 +1,37 @@
+.sources-status {
+  padding: 1.5rem 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+}
+
+.sources-error {
+  color: var(--color-danger);
+}
+
+.source-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.source-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.source-item:last-child {
+  border-bottom: none;
+}
+
+.source-name {
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.source-meta {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.15rem;
+}
