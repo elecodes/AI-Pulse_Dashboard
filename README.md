@@ -1,6 +1,6 @@
 # AI Intelligence Dashboard
 
-Aggregate, classify, and explore AI-developments from TechCrunch, MIT Tech Review, The Verge, arXiv, and Hugging Face — all in one place.
+Aggregate, classify, and explore AI-developments from TechCrunch, MIT Tech Review, The Verge, arXiv, Hugging Face, and Hacker News — all in one place.
 
 ## Quick start
 
@@ -27,15 +27,16 @@ No API keys required. Categories are assigned automatically via keyword rules (o
 ```
 Scraper(s)  →  Normalizer  →  Classifier  →  Storage  →  API  →  Frontend
  ─────           ─────          ─────         ─────       ───      ───────
- 5 feeds       Canonical      Rule or       SQLite      FastAPI   React 19
+ 6 feeds       Canonical      Rule or       SQLite      FastAPI   React 19
                Article        LLM                      + FTS5    + Recharts
                dataclass
 ```
 
-- **Five scrapers:** RSS (3), arXiv API (4 categories), Hugging Face API
+- **Six scrapers:** RSS (4: TechCrunch, MIT Tech Review, The Verge, Hacker News), arXiv API (4 categories), Hugging Face API
 - **Normalizer:** Converts raw feed entries to a canonical `Article` dataclass
 - **Classifier:** Keyword-based out of the box; optional OpenAI/Anthropic for LLM-powered
 - **Storage:** SQLite with upsert by URL, FTS5 full-text search, run tracking
+- **Email Digest:** Curated bi-weekly HTML/text newsletter dispatched via Gmail SMTP
 - **API:** FastAPI with pagination, filtering, FTS5 search, auto OpenAPI docs at `/docs`
 - **Frontend:** React 19 + Vite + Recharts, dark theme, responsive (375px–1920px)
 
@@ -71,6 +72,23 @@ export OPENAI_API_KEY=sk-...
 | `GET /trends` | `days` (default 7) | Volume per category per day |
 | `GET /sources` | — | Sources with last scrape timestamp |
 
+## Email Digest (Bi-weekly highlights)
+
+Generate and dispatch an email digest of highlighted AI and agent news via Gmail SMTP:
+
+```bash
+# Preview highlights in terminal without sending
+python -m backend.digest --dry-run
+
+# Dispatch email using .env credentials (GMAIL_USER, GMAIL_APP_PASSWORD, GMAIL_TO)
+python -m backend.digest
+```
+
+Automate with system cron for Mondays and Thursdays at 9:00 AM:
+```cron
+0 9 * * 1,4 cd "/path/to/project" && .venv/bin/python -m backend.scraper run && .venv/bin/python -m backend.digest >> data/digest.log 2>&1
+```
+
 ## Testing
 
 ```bash
@@ -93,6 +111,7 @@ backend/
 ├── scraper/          rss.py, arxiv.py, huggingface.py
 ├── normalizer/       normalizer.py
 ├── classifier/       base.py, rule.py, classifier.py, openai.py, anthropic.py
+├── digest/           newsletter.py, __main__.py
 ├── storage/          storage_layer.py
 ├── pipeline/         pipeline.py, scheduler.py
 ├── api/              main.py, routers/articles.py, trends.py, sources.py

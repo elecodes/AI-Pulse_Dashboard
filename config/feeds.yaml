@@ -30,3 +30,8 @@ feeds:
     type: huggingface
     url: https://huggingface.co/api/models
     enabled: true
+
+  - name: hackernews-ai
+    type: rss
+    url: https://hnrss.org/frontpage?q=AI+OR+LLM
+    enabled: true

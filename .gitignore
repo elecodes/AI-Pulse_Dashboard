@@ -11,6 +11,8 @@ data/articles.db
 data/articles.json
 *.db
 *.sqlite3
+*.log
+data/*.log
 .DS_Store
 node_modules/
 dist/
